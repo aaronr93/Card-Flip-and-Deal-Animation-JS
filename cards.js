@@ -475,38 +475,37 @@ function flip(context) {
 	}
 }
 
-var randomized_deck = function () {
-	var rand;
-	var card = [];
-	var indices = new Array(5);
-	var all_unique = false;
 
+var card = [];
+var rand;
+var indices = new Array(5);
+var all_unique = false;
+
+rand = Math.floor(Math.random() * 52);
+indices[iter] = rand;
+
+for (var iter = 0; iter < 5; iter += 1) {
 	rand = Math.floor(Math.random() * 52);
-	indices[iter] = rand;
-	for (var iter = 0; iter < 5; iter += 1) {
-		rand = Math.floor(Math.random() * 52);
-		for (var ind = 0; ind < indices.length; ind += 1) {
-			if (rand === ind) {
-				iter -= 1;
-				all_unique = false;
-			} else {
-				all_unique = true;
-			}
+	for (var ind = 0; ind < indices.length; ind += 1) {
+		if (rand === ind) {
+			iter -= 1;
+			all_unique = false;
+		} else {
+			all_unique = true;
 		}
-		if (all_unique) indices[iter] = rand;
 	}
+	if (all_unique) indices[iter] = rand;
+}
 
-	for (var index = 0; index < 5; index += 1) {
-		card.push(deck[indices[index]]);
-	}
-};
-
-randomized_deck;
+for (var index = 0; index < 5; index += 1) {
+	card.push(deck[indices[index]]);
+}
 
 function deal(context) {
 	var startTime = (new Date()).getTime();
 	animate(context, startTime);
 
+	drawDeck(context);
 	drawDeck(context);
 	
 	//context.save();
@@ -543,34 +542,40 @@ var card1 = {
 	y: 20,
 	x_end: 300,
 	y_end: 200 + ((Math.sin(30 * Math.PI / 180) * width) / 2),
-	suit: 'spades',
-	rank: 'A'
+	suit: card[0].suit,
+	rank: card[0].rank
 };
 var card2 = {
 	x: 20,
 	y: 20,
-	x_end: 350,
-	y_end: 200,
-	suit: 'hearts',
-	rank: '10'
+	x_end: 400,//350,
+	y_end: 250,//200,
+	suit: card[1].suit,
+	rank: card[1].rank
 };
 var card3 = {
 	x: 20,
 	y: 20,
-	x_end: 400,
-	y_end: 200 - ((Math.sin(15 * Math.PI / 180) * width) / 2)
+	x_end: 500,//400,
+	y_end: 300,//200 - ((Math.sin(15 * Math.PI / 180) * width) / 2),
+	suit: card[2].suit,
+	rank: card[2].rank
 };
 var card4 = {
 	x: 20,
 	y: 20,
-	x_end: 450,
-	y_end: 200 - ((Math.sin(15 * Math.PI / 180) * width) / 2)
+	x_end: 100,//450,
+	y_end: 250,//200 - ((Math.sin(15 * Math.PI / 180) * width) / 2),
+	suit: card[3].suit,
+	rank: card[3].rank
 };
 var card5 = {
 	x: 20,
 	y: 20,
-	x_end: 500,
-	y_end: 200
+	x_end: 100,//500,
+	y_end: 200,//200,
+	suit: card[4].suit,
+	rank: card[4].rank
 };
 
 window.requestAnimFrame = (function (callback) {
@@ -602,31 +607,40 @@ function animate(context, startTime) {
 		card1.x = newX1;
 		card1.y = newY1;
 	}
-	//if (newX2 < card2.x_end && newY2 < card2.y_end) {
-	//	card2.x = newX2;
-	//	card2.y = newY2;
-	//}
-	//if (newX3 < card3.x_end && newY3 < card3.y_end) {
-	//	card3.x = newX3;
-	//	card3.y = newY3;
-	//}
-	//if (newX4 < card4.x_end && newY4 < card4.y_end) {
-	//	card4.x = newX4;
-	//	card4.y = newY4;
-	//}
-	//if (newX5 < card5.x_end && newY5 < card5.y_end) {
-	//	card5.x = newX5;
-	//	card5.y = newY5;
-	//}
+	if (newX2 < card2.x_end && newY2 < card2.y_end) {
+		card2.x = newX2;
+		card2.y = newY2;
+	}
+	if (newX3 < card3.x_end && newY3 < card3.y_end) {
+		card3.x = newX3;
+		card3.y = newY3;
+	}
+	if (newX4 < card4.x_end && newY4 < card4.y_end) {
+		card4.x = newX4;
+		card4.y = newY4;
+	}
+	if (newX5 < card5.x_end && newY5 < card5.y_end) {
+		card5.x = newX5;
+		card5.y = newY5;
+	}
 
 	// clear
 	context.clearRect(0, 0, my_canvas.width, my_canvas.height);
-	
+	context.save();
 	drawCard(context, card1.suit, card1.rank, card1.x, card1.y);
+	context.restore();
+	context.save();
 	drawCard(context, card2.suit, card2.rank, card2.x, card2.y);
-	//drawCard(context, card3.suit, card3.rank, card3.x, card3.y);
-	//drawCard(context, card4.suit, card4.rank, card4.x, card4.y);
-	//drawCard(context, card5.suit, card5.rank, card5.x, card5.y);
+	context.restore();
+	context.save();
+	drawCard(context, card3.suit, card3.rank, card3.x, card3.y);
+	context.restore();
+	context.save();
+	drawCard(context, card4.suit, card4.rank, card4.x, card4.y);
+	context.restore();
+	context.save();
+	drawCard(context, card5.suit, card5.rank, card5.x, card5.y);
+	context.restore();
 	drawDeck(context);
 
 	// request new frame
