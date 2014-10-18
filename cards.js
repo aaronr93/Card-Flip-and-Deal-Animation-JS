@@ -564,7 +564,7 @@ var card3 = {
 var card4 = {
 	x: 20,
 	y: 20,
-	x_end: 100,//450,
+	x_end: 600,//450,
 	y_end: 250,//200 - ((Math.sin(15 * Math.PI / 180) * width) / 2),
 	suit: card[3].suit,
 	rank: card[3].rank
@@ -572,7 +572,7 @@ var card4 = {
 var card5 = {
 	x: 20,
 	y: 20,
-	x_end: 100,//500,
+	x_end: 700,//500,
 	y_end: 200,//200,
 	suit: card[4].suit,
 	rank: card[4].rank
@@ -603,26 +603,16 @@ function animate(context, startTime) {
 	var newY4 = linearSpeed * time / 1000;
 	var newY5 = linearSpeed * time / 1000;
 
-	if (newX1 < card1.x_end && newY1 < card1.y_end) {
-		card1.x = newX1;
-		card1.y = newY1;
-	}
-	if (newX2 < card2.x_end && newY2 < card2.y_end) {
-		card2.x = newX2;
-		card2.y = newY2;
-	}
-	if (newX3 < card3.x_end && newY3 < card3.y_end) {
-		card3.x = newX3;
-		card3.y = newY3;
-	}
-	if (newX4 < card4.x_end && newY4 < card4.y_end) {
-		card4.x = newX4;
-		card4.y = newY4;
-	}
-	if (newX5 < card5.x_end && newY5 < card5.y_end) {
-		card5.x = newX5;
-		card5.y = newY5;
-	}
+	if (newX1 < card1.x_end)	card1.x = newX1;
+	if (newY1 < card1.y_end)	card1.y = newY1;
+	if (newX2 < card2.x_end)	card2.x = newX2;
+	if (newY2 < card2.y_end)	card2.y = newY2;
+	if (newX3 < card3.x_end)	card3.x = newX3;
+	if (newY3 < card3.y_end)	card3.y = newY3;
+	if (newX4 < card4.x_end)	card4.x = newX4;
+	if (newY4 < card4.y_end)	card4.y = newY4;
+	if (newX5 < card5.x_end)	card5.x = newX5;
+	if (newY5 < card5.y_end)	card5.y = newY5;
 
 	// clear
 	context.clearRect(0, 0, my_canvas.width, my_canvas.height);
