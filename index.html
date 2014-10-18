@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Homework 4</title>
+	<script type="text/javascript" src="cards.js"></script>
+	<link rel="stylesheet" href="reset.css" />
+	<link rel="stylesheet" href="index.css" />
+</head>
+<body>
+	<section>
+		<form name="manip">
+			<fieldset>
+				<legend> Cards </legend>
+				<table>
+					<tr>
+						<th>Suit: </th>
+						<td>
+							<select id="suit" name="suit">
+								<option value="spades">♠ Spades</option>
+								<option value="clubs">♣ Clubs</option>
+								<option value="hearts">♥ Hearts</option>
+								<option value="diamonds">♦ Diamonds</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>Rank: </th>
+						<td>
+							<select id="rank" name="rank">
+								<option value="A">A</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="J">J</option>
+								<option value="Q">Q</option>
+								<option value="K">K</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<input id="flip" type="button" name="flip" value="FLIP" />
+				<input id="deal" type="button" name="deal" value="DEAL" />
+			</fieldset>
+		</form>
+	</section>
+	<section>
+		<canvas id="cardsDisplay" width="1000" height="450">Unable to display drawing canvas</canvas>
+	</section>
+</body>
+</html>
